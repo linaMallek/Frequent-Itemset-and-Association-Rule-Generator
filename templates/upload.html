@@ -1,0 +1,58 @@
+<!doctype html>
+<head> 
+   <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+   <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
+   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js" integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N" crossorigin="anonymous"></script>
+   <link rel="stylesheet" href="{{ url_for('static', filename='upload.css') }}">
+</head>
+<html>
+
+   <body>
+      <div class="container text-center "><h1>TP ANALYSE DE DONNEES </h1></div>
+      <div class="container">
+         
+    <div class="row">
+    
+      <div class="col">  
+      <h1>Uploader un fichier</h1>
+      <div class="row justify-content">
+         <div class="col-md-6">
+           <form action="/uploader" method="POST" enctype="multipart/form-data">
+             <div class="form-group">
+               <label for="customFile">Upload file:</label>
+               <input type="file" name="file" class="form-control-file custom-file-input" id="customFile" required>
+             </div>
+             <div class="form-group bg-transparent">
+               <label for="inputGroupSelect01">Select algorithm:</label>
+               <select class="form-control custom-select" id="inputGroupSelect01" name="type_algorithme">
+                 <option selected value="1">Apriori</option>
+                 <option value="2" class="custum-select">Apriori FV</option>
+                 <option value="3" class="custum-select">Three</option>
+               </select>
+             </div>
+             <div class="inner">
+             <div class="form-group">
+               <label for="min-sup-input">Enter a number between 0 and 1:</label>
+               <input type="number" class="form-control" id="min-sup-input" name="min_sup" min="0" max="1" step="0.01" placeholder="min support" >
+             </div>
+             <div class="form-group">
+               <label for="min-conf-input">Enter a number between 0 and 1:</label>
+               <input type="number" class="form-control" id="min-conf-input" name="min_conf" min="0" max="1" step="0.01" placeholder="min confiance">
+             </div>
+            </div>
+              <div class="text-center"><button type="submit" class="btn btn-primary ">Submit</button></div>
+           </form>
+         </div>
+       </div>
+   </div>
+    <div class="col ">
+      <h2>Apriori classique</h2>
+      <p>L'algorithme APriori est un algorithme d'exploration de données conçu en 1994, par Rakesh Agrawal et Ramakrishnan Sikrant, dans le domaine de l'apprentissage des règles d'association. Il sert à reconnaitre des propriétés qui reviennent fréquemment dans un ensemble de données et d'en déduire une catégorisation.</p>
+      <h2>Apriori avec fragementation vertical</h2>
+      <p>Vertical fragmentation is a technique used in distributed databases where a table is divided vertically into multiple tables based on the columns. This allows each table to be stored on a separate server, which can improve performance and scalability.</p>
+    </div>
+    </div>
+    </div>
+   </body>
+</html>
