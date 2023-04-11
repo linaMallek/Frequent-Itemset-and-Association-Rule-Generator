@@ -31,6 +31,7 @@ def apriori_Classique_frozenset(data, minsup, minconf):
         
         # Phase 3: Count supports of candidate itemsets
         item_counts = {itemset: 0 for itemset in candidates}
+
         for transaction in data:
             for candidate in candidates:
                 if candidate.issubset(set(transaction)):
@@ -216,6 +217,7 @@ def apriori_vfrag_Frozenset(data, minsup, minconf):
         
         # Phase 3 : Compter les supports des candidats
         item_counts = {itemset: 0 for itemset in candidates}
+
         for transaction in transactions:
             for candidate in candidates:
                 if candidate.issubset(transaction):
