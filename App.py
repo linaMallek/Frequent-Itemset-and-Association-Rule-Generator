@@ -71,7 +71,8 @@ def uploader_file():
       # Convert float keys to string keys
       itemsets_frequens = {str(k): v for k, v in freq_items_dict.items()}
 # Sort itemsets based on frequency values
-      sorted_itemsets = sorted(itemsets_frequens.items(), key=lambda x: x[1], reverse=True)
+      sorted_itemsets = itemsets_frequens.items()
+
     # Convert float keys to string keys
    
 
@@ -101,6 +102,11 @@ def uploader_file():
 # Écrire les frozensets dans le fichier avec un saut de ligne
    
       with open("frozensets.txt", "w") as f:
+        f.write('Les itemset frequent  :' + '\n')
+        for freq in freq_items_dict :
+             f.write(str(freq) + '\n')
+
+        f.write('The rules :' + '\n')
         for rule in rules:
              f.write(str(rule) + '\n')
 
