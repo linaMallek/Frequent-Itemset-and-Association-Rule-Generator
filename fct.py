@@ -248,4 +248,4 @@ def apriori_vfrag_Frozenset(data, minsup, minconf):
     rules.sort(key=lambda x:x[2], reverse=True)
     
     # Retourner les itemsets fréquents et les règles d'association
-    return freq_items, rules
+    return  rules , freq_items

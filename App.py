@@ -57,9 +57,11 @@ def uploader_file():
       match type_algorithme:
         case '1':
             rules , frequent_itemsets =apriori_Classique_frozenset(array, min_sup, min_conf)
+
             print(type(rules))
         case '2':
             rules , frequent_itemsets = apriori_vfrag_Frozenset(array, min_sup, min_conf)
+            
             rules= list(rules)
             print(type(rules))
        
