@@ -37,7 +37,7 @@ def uploader_file():
    
 
       # Chargement des données
-      df = pd.read_csv(filename)
+      df = pd.read_csv(filename,header=None)
      # Vérification de l'existence de la colonne "Date"
   
 
@@ -64,6 +64,11 @@ def uploader_file():
             
             rules= list(rules)
             print(type(rules))
+
+        case '3':             
+            rules , frequent_itemsets = apriori_Close(array, min_sup, min_conf)         
+            rules= list(rules)
+            print(type(rules))     
        
 
 
