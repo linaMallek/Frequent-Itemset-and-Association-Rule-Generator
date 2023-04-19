@@ -272,6 +272,7 @@ def apriori_Close(data, minsup, minconf,lift_choix ):
         freq_items_temp = {itemset:supp for itemset, supp in item_counts.items() if supp >= minsup}
         closed_items.update(freq_items_temp)
         #supprimer les redondant 
+        #cest ici que lon calcule les closes 
         freq_items = {itemset:supp for itemset, supp in freq_items_temp.items() if not any([itemset.issubset(other) and freq_items_temp[itemset] == freq_items_temp[other] for other in freq_items if itemset != other])}      
         k += 1
     

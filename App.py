@@ -44,7 +44,8 @@ def uploader_file():
 
 # Nettoyage des données
       df.dropna(inplace=True) # suppression des valeurs manquantes
-      df.drop_duplicates(inplace=True) # suppression des doublons
+      df.drop_duplicates(inplace=True) # suppression des doublons Lignes 
+      df = df.astype(str)
 
 
       
