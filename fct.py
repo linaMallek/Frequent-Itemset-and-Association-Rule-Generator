@@ -290,15 +290,15 @@ def apriori_Close(data, minsup, minconf,lift_choix ):
                         
                         match lift_choix :
                           case "1": 
-                             if conf >= minconf and lift>1 :
+                             if conf == 1 and lift>1 :
                                rule = (antecedent, consequent, conf,lift)
                                rules.append(rule)
                           case "2": 
-                             if conf >= minconf and lift<1 :
+                             if conf ==1 and lift<1 :
                                rule = (antecedent, consequent, conf,lift) 
                                rules.append(rule)
                           case "3": 
-                             if conf >= minconf  :
+                             if conf ==1 :
                                rule = (antecedent, consequent, conf,lift) 
                                rules.append(rule)  
     
