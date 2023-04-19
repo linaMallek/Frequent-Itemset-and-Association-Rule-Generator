@@ -31,6 +31,7 @@ def uploader_file():
         f = request.files['file']
         min_sup =float( request.form['min_sup'])
         min_conf = float(request.form['min_conf'] )
+        lift_choix = request.form['lift']
         type_algorithme= request.form['type_algorithme']
         filename = f.filename    
         f.save(f.filename)
@@ -56,17 +57,17 @@ def uploader_file():
       #min_conf = 0.6
       match type_algorithme:
         case '1':
-            rules , frequent_itemsets =apriori_Classique_frozenset(array, min_sup, min_conf)
+            rules , frequent_itemsets =apriori_Classique_frozenset(array, min_sup, min_conf,lift_choix)
 
             print(type(rules))
         case '2':
-            rules , frequent_itemsets = apriori_vfrag_Frozenset(array, min_sup, min_conf)
+            rules , frequent_itemsets = apriori_vfrag_Frozenset(array, min_sup, min_conf,lift_choix)
             
             rules= list(rules)
             print(type(rules))
 
         case '3':             
-            rules , frequent_itemsets = apriori_Close(array, min_sup, min_conf)         
+            rules , frequent_itemsets = apriori_Close(array, min_sup, min_conf,lift_choix )         
             rules= list(rules)
             print(type(rules))     
        
