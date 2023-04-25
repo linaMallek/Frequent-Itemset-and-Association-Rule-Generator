@@ -1,63 +1,32 @@
 Les itemset frequent  :
+('bread',)
 ('milk',)
 ('cheese',)
-('bread',)
-('eggs',)
 ('diapers',)
+('eggs',)
 ('water',)
-('bread', 'milk')
-('cheese', 'milk')
 ('diapers', 'water')
-('bread', 'diapers')
-('diapers', 'eggs')
 ('bread', 'eggs')
-('bread', 'water')
 ('bread', 'cheese')
+('bread', 'diapers')
+('bread', 'milk')
+('diapers', 'eggs')
+('bread', 'water')
 ('diapers', 'milk')
+('cheese', 'milk')
+('bread', 'diapers', 'eggs')
 ('bread', 'diapers', 'water')
 ('bread', 'cheese', 'milk')
-('bread', 'diapers', 'eggs')
 ('bread', 'diapers', 'milk')
 The rules :
 frozenset({'water'}) => frozenset({'diapers'}) => 1.0 => 4.0
+frozenset({'eggs'}) => frozenset({'bread'}) => 1.0 => 3.3333333333333335
 frozenset({'eggs'}) => frozenset({'diapers'}) => 1.0 => 4.0
-frozenset({'eggs'}) => frozenset({'bread'}) => 1.0 => 3.5555555555555554
-frozenset({'water'}) => frozenset({'bread'}) => 1.0 => 3.5555555555555554
-frozenset({'cheese'}) => frozenset({'bread'}) => 1.0 => 3.5555555555555554
-frozenset({'water'}) => frozenset({'bread', 'diapers'}) => 1.0 => 4.571428571428571
-frozenset({'bread', 'water'}) => frozenset({'diapers'}) => 1.0 => 4.0
-frozenset({'diapers', 'water'}) => frozenset({'bread'}) => 1.0 => 3.5555555555555554
-frozenset({'milk', 'cheese'}) => frozenset({'bread'}) => 1.0 => 3.5555555555555554
-frozenset({'eggs'}) => frozenset({'bread', 'diapers'}) => 1.0 => 4.571428571428571
+frozenset({'water'}) => frozenset({'bread'}) => 1.0 => 3.3333333333333335
+frozenset({'eggs'}) => frozenset({'diapers', 'bread'}) => 1.0 => 5.714285714285714
+frozenset({'diapers', 'eggs'}) => frozenset({'bread'}) => 1.0 => 3.3333333333333335
 frozenset({'eggs', 'bread'}) => frozenset({'diapers'}) => 1.0 => 4.0
-frozenset({'eggs', 'diapers'}) => frozenset({'bread'}) => 1.0 => 3.5555555555555554
-frozenset({'diapers'}) => frozenset({'bread'}) => 0.875 => 3.111111111111111
-frozenset({'milk'}) => frozenset({'bread'}) => 0.8333333333333334 => 2.962962962962963
-frozenset({'bread'}) => frozenset({'diapers'}) => 0.7777777777777778 => 3.111111111111111
-frozenset({'milk', 'diapers'}) => frozenset({'bread'}) => 0.75 => 2.6666666666666665
-frozenset({'cheese'}) => frozenset({'milk'}) => 0.6666666666666666 => 3.5555555555555554
-frozenset({'milk'}) => frozenset({'diapers'}) => 0.6666666666666666 => 2.6666666666666665
-frozenset({'cheese'}) => frozenset({'milk', 'bread'}) => 0.6666666666666666 => 4.266666666666667
-frozenset({'cheese', 'bread'}) => frozenset({'milk'}) => 0.6666666666666666 => 3.5555555555555554
-frozenset({'milk', 'bread'}) => frozenset({'diapers'}) => 0.6 => 2.4
-frozenset({'bread'}) => frozenset({'milk'}) => 0.5555555555555556 => 2.962962962962963
-frozenset({'diapers'}) => frozenset({'milk'}) => 0.5 => 2.6666666666666665
-frozenset({'milk'}) => frozenset({'bread', 'diapers'}) => 0.5 => 2.2857142857142856
-frozenset({'bread', 'diapers'}) => frozenset({'eggs'}) => 0.42857142857142855 => 4.571428571428571
-frozenset({'bread', 'diapers'}) => frozenset({'milk'}) => 0.42857142857142855 => 2.2857142857142856
-frozenset({'milk', 'bread'}) => frozenset({'cheese'}) => 0.4 => 4.266666666666667
-frozenset({'diapers'}) => frozenset({'eggs'}) => 0.375 => 4.0
-frozenset({'diapers'}) => frozenset({'eggs', 'bread'}) => 0.375 => 4.0
-frozenset({'diapers'}) => frozenset({'milk', 'bread'}) => 0.375 => 2.4
-frozenset({'milk'}) => frozenset({'cheese'}) => 0.3333333333333333 => 3.5555555555555554
-frozenset({'bread'}) => frozenset({'eggs'}) => 0.3333333333333333 => 3.5555555555555554
-frozenset({'bread'}) => frozenset({'cheese'}) => 0.3333333333333333 => 3.5555555555555554
-frozenset({'milk'}) => frozenset({'cheese', 'bread'}) => 0.3333333333333333 => 3.5555555555555554
-frozenset({'bread'}) => frozenset({'eggs', 'diapers'}) => 0.3333333333333333 => 3.5555555555555554
-frozenset({'bread'}) => frozenset({'milk', 'diapers'}) => 0.3333333333333333 => 2.6666666666666665
-frozenset({'bread', 'diapers'}) => frozenset({'water'}) => 0.2857142857142857 => 4.571428571428571
-frozenset({'diapers'}) => frozenset({'water'}) => 0.25 => 4.0
-frozenset({'diapers'}) => frozenset({'bread', 'water'}) => 0.25 => 4.0
-frozenset({'bread'}) => frozenset({'water'}) => 0.2222222222222222 => 3.5555555555555554
-frozenset({'bread'}) => frozenset({'diapers', 'water'}) => 0.2222222222222222 => 3.5555555555555554
-frozenset({'bread'}) => frozenset({'milk', 'cheese'}) => 0.2222222222222222 => 3.5555555555555554
+frozenset({'water'}) => frozenset({'diapers', 'bread'}) => 1.0 => 5.714285714285715
+frozenset({'diapers', 'water'}) => frozenset({'bread'}) => 1.0 => 3.3333333333333335
+frozenset({'bread', 'water'}) => frozenset({'diapers'}) => 1.0 => 4.0
+frozenset({'cheese', 'milk'}) => frozenset({'bread'}) => 1.0 => 3.3333333333333335

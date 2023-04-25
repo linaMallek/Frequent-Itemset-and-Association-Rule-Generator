@@ -245,7 +245,7 @@ def apriori_Close(data, minsup,lift_choix ):
     # Filter infrequent singletons and calculate support
     freq_items = {frozenset([item]): supp for item, supp in singletons.items() if supp >= minsup}
     closed_items = freq_items.copy() #initialiser avec les items frequent
-    maximal_items = {}
+  
     # Phase 2: Generate candidate itemsets of size k
     k = 2
     while freq_items:
@@ -279,7 +279,7 @@ def apriori_Close(data, minsup,lift_choix ):
             for itemset2, supp2 in closed_items.items():
                 if itemset.issubset(itemset2) and freq_items[itemset] == supp2:
                     is_closed = False
-                   
+                    
             if is_closed:
                 closed_items[itemset] = freq_items[itemset]
             
@@ -297,7 +297,7 @@ def apriori_Close(data, minsup,lift_choix ):
                     #vérifier si l'antécédent est fermé
                     if antecedent in closed_items:
                         lift = closed_items[itemset] / (closed_items[antecedent] * closed_items[consequent])
-                        conf = 1
+                        conf =  closed_items[itemset] / closed_items[antecedent]
                         match lift_choix :
                           case "1": 
                              if  lift>1 :
