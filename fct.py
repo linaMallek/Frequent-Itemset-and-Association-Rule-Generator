@@ -227,8 +227,9 @@ def apriori_vfrag_Frozenset(data, minsup, minconf,lift_choix):
 
 
 #-----------------------------------------------------------Algorithme Close---------------------------------------------------------------------------
-def apriori_Close(data, minsup, minconf,lift_choix ):
-    # Phase 1: Find frequent single items
+
+def apriori_Close(data, minsup,lift_choix ):
+    # Phase 1: Find frequent single items and support
     singletons = {}
     for transaction in data:
         for item in transaction:
@@ -237,21 +238,18 @@ def apriori_Close(data, minsup, minconf,lift_choix ):
             else:
                 singletons[item] = 1
 
-    nb_elements=0
-    for transaction in data:
-    # Ajouter le nombre d'éléments dans la transaction au compteur
-         nb_elements += len(transaction)
+    nb_elements = sum(len(transaction) for transaction in data)
 
     for key in singletons:
-        singletons[key] = singletons[key] / nb_elements
-
-    # Filter infrequent singletons
-    freq_items = {frozenset([item]):supp for item, supp in singletons.items() if supp >= minsup}
-    closed_items = freq_items.copy()
-    
+       singletons[key] = singletons[key] / nb_elements  
+    # Filter infrequent singletons and calculate support
+    freq_items = {frozenset([item]): supp for item, supp in singletons.items() if supp >= minsup}
+    closed_items = freq_items.copy() #initialiser avec les items frequent
+    maximal_items = {}
+    # Phase 2: Generate candidate itemsets of size k
     k = 2
     while freq_items:
-        # Phase 2: Generate candidate itemsets of size k
+        # Generate candidate itemsets of size k
         candidates = set()
         for itemset1 in freq_items.keys():
             for itemset2 in freq_items.keys():
@@ -259,29 +257,38 @@ def apriori_Close(data, minsup, minconf,lift_choix ):
                     candidate = itemset1.union(itemset2)
                     if candidate not in candidates:
                         candidates.add(candidate)
-        
-        # Phase 3: Count supports of candidate itemsets
+
+        # Count supports of candidate itemsets
         item_counts = {itemset: 0 for itemset in candidates}
         for transaction in data:
             for candidate in candidates:
                 if candidate.issubset(set(transaction)):
                     item_counts[candidate] += 1
+
         
-     
-       
         #le support
         for key in item_counts:
-            item_counts[key] = item_counts[key] /nb_elements
+            item_counts[key] = item_counts[key] / nb_elements                
 
-        # Filter infrequent itemsets and update closed itemsets
-        freq_items_temp = {itemset:supp for itemset, supp in item_counts.items() if supp >= minsup}
-        closed_items.update(freq_items_temp)
-        #supprimer les redondant 
-        #cest ici que lon calcule les closes 
-        freq_items = {itemset:supp for itemset, supp in freq_items_temp.items() if not any([itemset.issubset(other) and freq_items_temp[itemset] == freq_items_temp[other] for other in freq_items if itemset != other])}      
+        # Filter infrequent itemsets and calculate support
+        freq_items = {itemset: supp for itemset, supp in item_counts.items() if supp >= minsup}
+        #vérifier si l'itemset est fermé et maximal
+        for itemset in freq_items:
+            is_closed = True
+            is_maximal = True
+            for itemset2, supp2 in closed_items.items():
+                if itemset.issubset(itemset2) and freq_items[itemset] == supp2:
+                    is_closed = False
+                    if itemset != itemset2:
+                        is_maximal = False
+            if is_closed:
+                closed_items[itemset] = freq_items[itemset]
+            if is_maximal:
+                maximal_items[itemset] = freq_items[itemset]
+
         k += 1
     
-    # Generate association rules from closed itemsets
+    # Generate association rules from frequent itemsets
     rules = []
     for itemset in closed_items.keys():
         if len(itemset) > 1:
@@ -289,26 +296,29 @@ def apriori_Close(data, minsup, minconf,lift_choix ):
                 for antecedent in combinations(itemset, i):
                     antecedent = frozenset(antecedent)
                     consequent = itemset.difference(antecedent)
-                    if antecedent in closed_items and consequent in closed_items:
-                        conf = closed_items[itemset] / closed_items[antecedent]
+                    #vérifier si l'antécédent est fermé
+                    if antecedent in closed_items:
                         lift = closed_items[itemset] / (closed_items[antecedent] * closed_items[consequent])
-                        
+                        conf = 1
                         match lift_choix :
                           case "1": 
-                             if conf == 1 and lift>1 :
+                             if  lift>1 :
                                rule = (antecedent, consequent, conf,lift)
                                rules.append(rule)
                           case "2": 
-                             if conf ==1 and lift<1 :
+                             if  lift<1 :
                                rule = (antecedent, consequent, conf,lift) 
                                rules.append(rule)
                           case "3": 
-                             if conf ==1 :
+                             if conf == 1 :
                                rule = (antecedent, consequent, conf,lift) 
                                rules.append(rule)  
+                              
     
+                     
+                        
     # Sort rules by decreasing confidence
-    rules.sort(key=lambda x:x[2], reverse=True)
-    
-    # Return closed itemsets and association rules
-    return rules,closed_items
+    #rules.sort(key=lambda x:x[2], reverse=True)
+    #print(rules)
+    # Return frequent itemsets and association rules
+    return  rules,closed_items

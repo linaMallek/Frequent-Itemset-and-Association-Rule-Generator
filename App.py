@@ -68,9 +68,9 @@ def uploader_file():
             print(type(rules))
 
         case '3':             
-            rules , frequent_itemsets = apriori_Close(array, min_sup, min_conf,lift_choix )         
+            rules , frequent_itemsets = apriori_Close(array, min_sup, lift_choix )         
             rules= list(rules)
-            print(type(rules))     
+            print(rules)     
        
 
 
@@ -117,8 +117,8 @@ def uploader_file():
 
         f.write('The rules :' + '\n')
         for rule in rules:
-             f.write(str(rule) + '\n')
-
+             rule_str = ' => '.join([str(itemset) for itemset in rule])
+             f.write(rule_str + '\n')
 # Générer le PDF
       c = canvas.Canvas("static/frozensets.pdf")
       y = 750  # Position verticale de départ
