@@ -272,7 +272,7 @@ def apriori_Close(data, minsup,lift_choix ):
 
         # Filter infrequent itemsets and calculate support
         freq_items = {itemset: supp for itemset, supp in item_counts.items() if supp >= minsup}
-        #vérifier si l'itemset est fermé et maximal
+        #vérifier si l'itemset est fermé 
         for itemset in freq_items:
             is_closed = True
           
