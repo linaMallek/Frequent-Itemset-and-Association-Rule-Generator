@@ -275,7 +275,7 @@ def apriori_Close(data, minsup,lift_choix ):
         #vérifier si l'itemset est fermé et maximal
         for itemset in freq_items:
             is_closed = True
-            is_maximal = True
+          
             for itemset2, supp2 in closed_items.items():
                 if itemset.issubset(itemset2) and freq_items[itemset] == supp2:
                     is_closed = False
