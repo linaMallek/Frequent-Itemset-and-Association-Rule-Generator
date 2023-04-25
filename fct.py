@@ -3,7 +3,7 @@ from itertools import combinations
 from sklearn.preprocessing import StandardScaler
 from mlxtend.preprocessing import TransactionEncoder
 
-
+#--------------------------------------------------------------Apriori classique -------------------------------------------------------------------
 
 def apriori_Classique_frozenset(data, minsup, minconf,lift_choix):
     # Phase 1: Find frequent single items
@@ -101,12 +101,14 @@ def apriori_Classique_frozenset(data, minsup, minconf,lift_choix):
     # Return frequent itemsets and association rules
     return rules, freq_items
 
+
+#----------------------------------------------------------------Apriori ameliorer-------------------------------------------------------------------
 def apriori_vfrag_Frozenset(data, minsup, minconf,lift_choix):
-    # Phase 1 : Calculer les supports des singletons
+    
 
-     #Enlever les doublons 
+    #Enlever les doublons 
     transactions = [set(transaction) for transaction in data]
-
+    # Phase 1 : Calculer les supports des singletons
     singletons = {}
     for transaction in transactions:
         for item in transaction:
@@ -119,7 +121,8 @@ def apriori_vfrag_Frozenset(data, minsup, minconf,lift_choix):
     for transaction in transactions:
     # Ajouter le nombre d'éléments dans la transaction au compteur
          nb_elements += len(transaction)
-     #le support 
+    
+    #le support 
     print(nb_elements)
     for key in singletons:
      singletons[key] = singletons[key] / nb_elements            
@@ -222,6 +225,8 @@ def apriori_vfrag_Frozenset(data, minsup, minconf,lift_choix):
     print(freq_items)
     return rules , freq_items
 
+
+#-----------------------------------------------------------Algorithme Close---------------------------------------------------------------------------
 def apriori_Close(data, minsup, minconf,lift_choix ):
     # Phase 1: Find frequent single items
     singletons = {}
