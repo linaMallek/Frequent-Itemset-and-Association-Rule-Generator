@@ -279,12 +279,10 @@ def apriori_Close(data, minsup,lift_choix ):
             for itemset2, supp2 in closed_items.items():
                 if itemset.issubset(itemset2) and freq_items[itemset] == supp2:
                     is_closed = False
-                    if itemset != itemset2:
-                        is_maximal = False
+                   
             if is_closed:
                 closed_items[itemset] = freq_items[itemset]
-            if is_maximal:
-                maximal_items[itemset] = freq_items[itemset]
+            
 
         k += 1
     
@@ -317,8 +315,7 @@ def apriori_Close(data, minsup,lift_choix ):
     
                      
                         
-    # Sort rules by decreasing confidence
-    #rules.sort(key=lambda x:x[2], reverse=True)
+   
     #print(rules)
     # Return frequent itemsets and association rules
     return  rules,closed_items
