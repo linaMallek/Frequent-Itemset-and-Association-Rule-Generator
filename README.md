@@ -1,20 +1,36 @@
-# TP-FOUILLE
+# Frequent Itemsets and Association Rules Generation App
 
-## Structure
-**fct.py** : This file contains the implementation of three algorithms (Apriori, Improved Apriori, and Close).
+## Overview
 
-**app.py**: This file contains the function calls to the algorithms and connects the front-end and back-end of the application.
+This Flask-based application allows users to upload a dataset, apply Apriori-based algorithms to generate frequent itemsets and association rules, and visualize the results. The app generates a bar plot and a PDF with the frequent itemsets and rules.
 
-## How to run it 
+## Features
 
-1-Open a terminal window and navigate to the root directory of the Flask project.
+- Supports multiple algorithms (classic Apriori, vertical fragment Apriori, and closed itemsets)
+- User-specified minimum support, confidence, and lift thresholds
+- Generates a bar plot of frequent itemsets
+- Outputs association rules and itemsets in a downloadable PDF
 
-2-Create a virtual environment for the project using the following command: python3 -m venv venv
+## File Structure
 
-3-Activate the virtual environment using the following command: source venv/bin/activate
+- **`app.py`**: The Flask application script.
+- **`fct.py`**: Contains the algorithm functions.
+- **`templates/`**: Contains HTML templates for rendering.
+  - **`upload.html`**: File upload and parameter input form.
+  - **`result.html`**: Displays the result, bar plot, and PDF download links.
+- **`static/`**: Folder to store generated images and PDFs.
+- **`frozensets.txt`**: Temporary file to store frequent itemsets and rules.
+- **`frozensets.pdf`**: Generated PDF file with frequent itemsets and association rules.
 
-4- Install the required dependencies by running the following command:pip install -r requirements.txt
+## Dependencies
 
-5- Set the Flask app environment variable by running the following command:export FLASK_APP=app.py
+- Flask
+- Pandas
+- Matplotlib
+- ReportLab
+- NumPy
 
-6-Run the Flask app using the following command: flask run 
+You can install these dependencies via pip:
+
+```bash
+pip install flask pandas matplotlib reportlab numpy
